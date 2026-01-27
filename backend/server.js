@@ -8,11 +8,15 @@ const taskRoutes = require('./routes/tasks');
 
 const app = express();
 
-app.use(cors({
-    origin: process.env.FRONTEND_URL,
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true
-}));
+// app.use(cors({
+//     origin: process.env.FRONTEND_URL,
+//     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+//     allowedHeaders: ["Content-Type", "Authorization"],
+//     credentials: true
+//   }));
+//   app.options("*", cors());
+app.use(cors());
+
   
 app.use(express.json());
 
