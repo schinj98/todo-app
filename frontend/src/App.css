@@ -4,6 +4,16 @@
   padding: 2rem;
   text-align: center;
 }
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600&display=swap');
+
+* {
+  font-family: 'Archivo', sans-serif;
+}
+
+/* Optional: Different font for headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Sora', sans-serif;
+}
 
 .logo {
   height: 6em;
