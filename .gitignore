@@ -1,0 +1,11 @@
+# Global env
+.env
+
+# OS files
+.DS_Store
+
+# Logs
+*.log
+
+# Docker
+.env.docker
