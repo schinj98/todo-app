@@ -4,6 +4,7 @@ import { getTasks } from '../utils/api';
 import TaskForm from './TaskForm';
 import TaskList from './TaskList';
 import DailySummary from './DailySummary';
+import { Plus, LogOut, ListTodo, Loader2, Search, Filter } from 'lucide-react';
 
 const Dashboard = () => {
   const [tasks, setTasks] = useState([]);
@@ -49,16 +50,17 @@ const Dashboard = () => {
       <nav className="bg-white shadow-md">
         <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
           <div>
-            <h1 className="text-2xl font-bold text-gray-800">Todo Dashboard</h1>
+            <h1 className="text-2xl font-bold text-gray-800">Dashboard</h1>
             <p className="text-gray-600">Welcome, {user.name}!</p>
           </div>
           <div className="flex gap-4">
             <DailySummary />
             <button
               onClick={handleLogout}
-              className="bg-red-600 text-white py-2 px-6 rounded-lg hover:bg-red-700 transition duration-200"
+              className="flex items-center gap-2 px-4 py-2 text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-lg"
             >
-              Logout
+              <LogOut className="w-4 text-red-600 h-4" />
+              <span className="hidden sm:block  text-red-600 ">Logout</span>
             </button>
           </div>
         </div>

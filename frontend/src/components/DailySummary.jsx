@@ -26,7 +26,7 @@ const DailySummary = () => {
         disabled={loading}
         className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white py-2 px-6 rounded-lg hover:from-purple-700 hover:to-indigo-700 transition duration-200 shadow-lg disabled:opacity-50"
       >
-        {loading ? 'Generating...' : '✨ Generate Daily Summary'}
+        {loading ? 'Generating...' : 'Generate Daily Summary'}
       </button>
 
       {showModal && (

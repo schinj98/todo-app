@@ -38,11 +38,16 @@ router.put('/:id', auth, async (req, res) => {
       task[key] = req.body[key];
     });
 
-    if (req.body.completed && !task.completedAt) {
-      task.completedAt = new Date();
-    } else if (!req.body.completed) {
-      task.completedAt = null;
-    }
+    if (req.body.hasOwnProperty('completed')) {
+        task.completed = req.body.completed === true || req.body.completed === 'true';
+      
+        if (task.completed) {
+          task.completedAt = task.completedAt || new Date();
+        } else {
+          task.completedAt = null;
+        }
+      }
+      
 
     await task.save();
     res.json(task);
@@ -67,14 +72,18 @@ router.delete('/:id', auth, async (req, res) => {
 
 router.post('/summary', auth, async (req, res) => {
   try {
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    
+    const start = new Date();
+    start.setHours(0, 0, 0, 0);
+
+    const end = new Date();
+    end.setHours(23, 59, 59, 999);
+
     const completedTasks = await Task.find({
-      userId: req.userId,
-      completed: true,
-      completedAt: { $gte: today }
+    userId: req.userId,
+    completed: true,
+    completedAt: { $gte: start, $lte: end }
     });
+
 
     if (completedTasks.length === 0) {
       return res.json({ summary: 'No tasks completed today.' });
@@ -82,7 +91,7 @@ router.post('/summary', auth, async (req, res) => {
 
     const taskList = completedTasks.map(t => `- ${t.title}`).join('\n');
     
-    const prompt = `Summarize the following tasks I completed today in a motivating and concise way:\n${taskList}`;
+    const prompt = `Summarize the following tasks I've completed and do not use prefixes such as if you need i can also jsut be concise as you're human. give atleast 10-15 words for each tasks:\n${taskList}`;
 
     const response = await axios.post(
       'https://api.groq.com/openai/v1/chat/completions',
