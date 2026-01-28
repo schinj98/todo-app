@@ -54,6 +54,12 @@ const Dashboard = () => {
             <p className="text-gray-600">Welcome, {user.name}!</p>
           </div>
           <div className="flex gap-4">
+            <button
+              onClick={() => navigate('/summary-history')}
+              className="bg-purple-600 text-white py-2 px-6 rounded-lg hover:bg-purple-700 transition duration-200"
+            >
+              View History
+            </button>
             <DailySummary />
             <button
               onClick={handleLogout}

@@ -48,5 +48,9 @@ export const getDailySummary = async () => {
   const response = await api.post('/tasks/summary');
   return response.data;
 };
+export const getSummaries = async () => {
+  const response = await api.get('/tasks/summaries');
+  return response.data;
+};
 
 export default api;
